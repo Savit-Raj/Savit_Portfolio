@@ -1,0 +1,24 @@
+# deps & build
+node_modules
+dist
+dist-ssr
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# private source docs (resume with personal details)
+Savit_SDE_Resume.pdf
