@@ -99,7 +99,7 @@ export function Hero() {
           </motion.div>
 
           <p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-fog-500">
-            <ScrambleText text={`${site.role} @ ${site.company} — ${site.location}`} trigger="mount" delay={300} speed={18} />
+            <ScrambleText text={`${site.name} · ${site.role} @ ${site.company} — ${site.location}`} trigger="mount" delay={300} speed={18} />
           </p>
 
           <h1 className="text-[clamp(2.4rem,10.4vw,4rem)] font-medium leading-[0.98] tracking-[-0.045em] lg:text-[clamp(3rem,5.9vw,5.6rem)]">

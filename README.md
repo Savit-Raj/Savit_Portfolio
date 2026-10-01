@@ -28,15 +28,18 @@ Node 20+ recommended.
 ## Project structure
 
 ```
-├─ index.html                  SEO meta, Open Graph, JSON-LD (Person schema)
+├─ index.html                  SEO meta + Open Graph (URL, JSON-LD and page HTML filled in at build)
 ├─ vercel.json                 cache + security headers
 ├─ public/
 │  ├─ favicon.svg · apple-touch-icon.png · og-image.png
-│  ├─ robots.txt · sitemap.xml
 │  └─ media/                   ← drop project demo videos here (see below)
-├─ scripts/og/                 HTML template + script that renders og-image.png
+├─ scripts/
+│  ├─ prerender.mjs            build step: static HTML + robots.txt, sitemap.xml, llms.txt, llms-full.txt
+│  └─ og/                      HTML template + script that renders og-image.png
 └─ src/
-   ├─ config/site.ts           ★ identity, links, availability, résumé toggle
+   ├─ config/site.ts           ★ identity, site URL, links, availability, SEO description
+   ├─ entry-server.tsx         build-time renderer used by prerender.mjs
+   ├─ seo/                     structured data (JSON-LD) + agent files, generated from data/
    ├─ data/                    ★ ALL copy lives here — edit content without touching components
    │  ├─ projects.ts             project cards (links, stack, highlights, video paths)
    │  ├─ metrics.ts              the numbers strip under the hero
@@ -125,8 +128,43 @@ node scripts/og/render.mjs
 
 1. Push this folder to a GitHub repo.
 2. In Vercel: **Add New → Project → import the repo**. It auto-detects Vite (`vercel.json` pins the build).
-3. Once you know the final domain, replace `savitraj.vercel.app` in:
-   `index.html` (canonical, og:url, og:image, JSON-LD), `public/robots.txt`, `public/sitemap.xml`, `src/config/site.ts`.
+3. If your live URL isn't `https://savitraj.vercel.app`, change `url` in `src/config/site.ts`. That's the only
+   place: the build writes it into the canonical link, social cards, JSON-LD, robots.txt, sitemap.xml and llms.txt.
+
+---
+
+## Search engines & AI agents
+
+**What the build produces**
+
+- **Pre-rendered HTML.** `npm run build` renders the whole page to static HTML (`scripts/prerender.mjs`), and the
+  browser then hydrates it into the animated app. Search engines and AI crawlers, most of which don't run
+  JavaScript, see every word: name, headline, projects, services, experience and contact.
+- **Structured data.** schema.org `WebSite` + `ProfilePage` + `Person`, with your photo, `sameAs` links to
+  LinkedIn and GitHub, and your projects. This is what search engines use for name searches.
+- **`/robots.txt`.** Everyone is allowed, and the major AI crawlers are named explicitly (OpenAI, Anthropic,
+  Perplexity, Google-Extended, Apple, Meta, Amazon, DuckDuckGo, Mistral, Common Crawl). To keep AI *search*
+  but opt out of model *training*, add `Disallow: /` groups for `GPTBot`, `ClaudeBot`, `Google-Extended`,
+  `Applebot-Extended` and `CCBot` in `src/seo/agentFiles.ts`.
+- **`/llms.txt` and `/llms-full.txt`.** Markdown versions of the site for AI agents ([llmstxt.org](https://llmstxt.org)).
+- **`/sitemap.xml`.** `lastmod` updates on every build.
+
+All of these are generated from `src/config/site.ts` and `src/data/`, so they stay in sync with the page.
+
+**After the first deploy (one time, about 15 minutes):**
+
+1. **Google Search Console** (https://search.google.com/search-console): add your URL as a property, verify it
+   (the "HTML tag" method means pasting one `<meta>` line into `index.html`), then under *Sitemaps* submit
+   `sitemap.xml` and under *URL inspection* click **Request indexing**.
+2. **Bing Webmaster Tools** (https://www.bing.com/webmasters): you can import the property from Search Console.
+   Bing's index also feeds ChatGPT search and Copilot.
+3. **Link to the site from your profiles.** These links are what tie the name "Savit Raj" to this site:
+   - LinkedIn: *Contact info → Website*, plus a *Featured* link;
+   - GitHub: *profile → Website*, and your profile README;
+   - your LinkedIn posts about the projects.
+
+Searches for "Savit Raj" should show the site within days to a few weeks of indexing. A bare "Savit" is a
+shared first name, so ranking for it depends on those external links and on time; no site can guarantee it.
 
 ---
 

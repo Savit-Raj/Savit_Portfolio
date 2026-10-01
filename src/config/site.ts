@@ -13,7 +13,38 @@ export const site = {
   timeZone: 'Asia/Kolkata',
   timeZoneLabel: 'IST',
   email: 'savitraj81597@gmail.com',
+
+  /**
+   * ★ Your live URL (no trailing slash): the ONLY place to change it. At build time it's written
+   * into the canonical link, social cards, structured data, robots.txt, sitemap.xml and llms.txt.
+   */
   url: 'https://savitraj.vercel.app',
+
+  /** One-line bio for search results, structured data and llms.txt. */
+  description:
+    'Agentic AI engineer at EY (Pune, India) building end-to-end, domain-specific AI automation: Agentic RAG, LangGraph agents with human-in-the-loop, document intelligence and LLM cost optimisation. Available for freelance projects.',
+
+  /** Public headshot (your GitHub avatar) shown by search engines for profile results. Set to null to omit. */
+  photo: 'https://avatars.githubusercontent.com/u/133812414?v=4&s=460' as string | null,
+
+  /** Topics you want to be found for (schema.org `knowsAbout`). */
+  expertise: [
+    'Agentic AI',
+    'Retrieval-Augmented Generation (RAG)',
+    'Agentic RAG',
+    'LangGraph',
+    'LangChain',
+    'Milvus',
+    'Human-in-the-loop AI agents',
+    'LLM cost optimisation',
+    'Document intelligence',
+    'Knowledge graphs',
+    'Computer vision',
+    'Python',
+    'FastAPI',
+    'React',
+    'TypeScript',
+  ],
 
   availability: {
     open: true,

@@ -61,7 +61,8 @@ export function Footer() {
       </motion.p>
 
       <div className="container-page flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] py-6 font-mono text-[11px] text-fog-600">
-        <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
+        {/* build year vs. visitor's year can differ around New Year; that's fine */}
+        <span suppressHydrationWarning>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
         <span>
           {site.role} · {site.location}
         </span>

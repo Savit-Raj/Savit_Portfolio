@@ -3,51 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- The site URL, structured data and page content are filled in at build time by
+         scripts/prerender.mjs from src/config/site.ts. To change the domain, edit site.ts only. -->
     <title>Savit Raj — Agentic AI Engineer · Freelance AI Automation</title>
     <meta
       name="description"
       content="Savit Raj is an Agentic AI engineer at EY building end-to-end, domain-specific AI automation: Agentic RAG, LangGraph agents with human-in-the-loop, document intelligence and LLM cost optimisation. Available for freelance projects."
     />
     <meta name="author" content="Savit Raj" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#060708" />
     <meta name="color-scheme" content="dark" />
-    <link rel="canonical" href="https://savitraj.vercel.app/" />
+    <link rel="canonical" href="__SITE_URL__/" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Identity: ties this site to the same person on other profiles -->
+    <link rel="me" href="https://www.linkedin.com/in/savit-raj/" />
+    <link rel="me" href="https://github.com/Savit-Raj" />
 
     <!-- Open Graph / social -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://savitraj.vercel.app/" />
+    <meta property="og:type" content="profile" />
+    <meta property="profile:first_name" content="Savit" />
+    <meta property="profile:last_name" content="Raj" />
+    <meta property="og:url" content="__SITE_URL__/" />
     <meta property="og:site_name" content="Savit Raj" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content="Savit Raj — I turn workflows into AI agents" />
     <meta
       property="og:description"
       content="Agentic AI engineer at EY. Agentic RAG, LangGraph agents, document intelligence. ~5× cheaper per request in production. Open for freelance."
     />
-    <meta property="og:image" content="https://savitraj.vercel.app/og-image.png" />
+    <meta property="og:image" content="__SITE_URL__/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Savit Raj — I turn workflows into AI agents that actually ship." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Savit Raj — I turn workflows into AI agents" />
     <meta name="twitter:description" content="Agentic AI engineer at EY. Open for freelance AI automation projects." />
-    <meta name="twitter:image" content="https://savitraj.vercel.app/og-image.png" />
+    <meta name="twitter:image" content="__SITE_URL__/og-image.png" />
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Savit Raj",
-        "jobTitle": "Agentic AI Engineer",
-        "worksFor": { "@type": "Organization", "name": "EY" },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Birla Institute of Technology, Mesra" },
-        "address": { "@type": "PostalAddress", "addressLocality": "Pune", "addressCountry": "IN" },
-        "email": "mailto:savitraj81597@gmail.com",
-        "url": "https://savitraj.vercel.app/",
-        "sameAs": ["https://www.linkedin.com/in/savit-raj/", "https://github.com/Savit-Raj"],
-        "knowsAbout": ["Agentic AI", "Retrieval-Augmented Generation", "LangGraph", "Milvus", "LLM cost optimisation", "React", "FastAPI"]
-      }
-    </script>
+    <!-- schema.org structured data (WebSite + ProfilePage + Person), generated at build -->
+    <!--seo:jsonld-->
   </head>
   <body>
     <noscript>
@@ -55,7 +54,7 @@
         Savit Raj — Agentic AI Engineer. Email: savitraj81597@gmail.com · linkedin.com/in/savit-raj · github.com/Savit-Raj
       </p>
     </noscript>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

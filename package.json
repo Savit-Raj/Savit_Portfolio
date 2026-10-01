@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "dev:clean": "node -e \"require('fs').rmSync('node_modules/.vite',{recursive:true,force:true})\" && vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "oxlint src"

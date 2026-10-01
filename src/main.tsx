@@ -5,11 +5,17 @@ import '@fontsource/instrument-serif/400-italic.css'
 import './styles/globals.css'
 
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import App from './App'
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Production HTML is pre-rendered at build time (scripts/prerender.mjs), so attach to it;
+// the dev server serves an empty root, so render from scratch.
+if (container.firstElementChild) hydrateRoot(container, app)
+else createRoot(container).render(app)
