@@ -15,9 +15,12 @@ export type SubmitResult =
   | { ok: true }
   | { ok: false; error: string; /** FormSubmit needs its one-time activation click. */ activation?: boolean }
 
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined
+/** Env vars count only when non-blank: an empty `VAR=` (e.g. pasted from .env.example) means "not set". */
+const optionalEnv = (value: string | undefined) => value?.trim() || undefined
+
+const WEB3FORMS_KEY = optionalEnv(import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
 /** Optional FormSubmit alias (from its activation email) so the endpoint doesn't expose the address. */
-const FORMSUBMIT_ID = import.meta.env.VITE_FORMSUBMIT_ID as string | undefined
+const FORMSUBMIT_ID = optionalEnv(import.meta.env.VITE_FORMSUBMIT_ID)
 const TIMEOUT_MS = 15_000
 
 /* ------------------------------------------------------------------------------------------
